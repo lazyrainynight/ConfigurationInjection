@@ -7,9 +7,14 @@ public class Runner : IHostedService
 {
     private readonly IHelloService _helloService;
 
-    public Runner(IHelloService helloService)
+    private readonly IByeService _byeService;
+
+    public Runner(
+        IHelloService helloService,
+        IByeService byeService)
     {
         _helloService = helloService;
+        _byeService = byeService;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -20,6 +25,7 @@ public class Runner : IHostedService
 
     public async Task StopAsync(CancellationToken cancellationToken)
     {
+        _byeService.SayBye();
         Console.WriteLine($"[{nameof(Runner)}.{nameof(StopAsync)}()][{DateTime.Now:yyyy-MM-dd HH:mm:ss}]");
     }
 }
