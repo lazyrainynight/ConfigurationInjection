@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using ConfigurationInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-Console.WriteLine("Hello, World!");
+var builder = Host.CreateApplicationBuilder();
+
+builder.Services.AddHostedService<Runner>();
+
+var host = builder.Build();
+await host.RunAsync();
